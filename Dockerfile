@@ -2,13 +2,13 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copier les fichiers de dépendances
+# Copy dependency files
 COPY package*.json ./
 
-# Installer les dépendances
+# Install dependencies
 RUN npm ci --omit=dev
 
-# Copier le code source
+# Copy source code
 COPY . .
 
 # Exposer le port
