@@ -10,8 +10,6 @@ const createCheckoutSession = async (req, res) => {
       mode: "payment",
       payment_method_types: ["card"],
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: "dressing-app://payment-success",
-      cancel_url: "dressing-app://payment-cancel",
       metadata: {
         userId,
         tokenPack: tokenAmount.toString(), // Ex: "5"
@@ -48,8 +46,8 @@ const handleWebhook = async (req, res) => {
     }
 
     try {
-      // ✅ Appel vers ton service BDD pour incrémenter les tokens
-      await axios.put(`http://localhost:4001/api/users/${userId}/reset-tokens`, {
+      // ✅ Appel vers le service BDD pour incrémenter les tokens
+      await axios.put(`http://bdd-service:4001/api/users/${userId}/reset-tokens`, {
         aiTokens: tokensToAdd,
         lastTokenReset: new Date()
       });
